@@ -1,0 +1,12 @@
+[
+  {
+    "id": "ex1",
+    "prompt": "Translate to French: Hello, world",
+    "expected": "Bonjour, le monde"
+  },
+  {
+    "id": "ex2",
+    "prompt": "Summarise: Python is a high-level programming language used for web development, data analysis, AI, and more.",
+    "expected": "Python is a versatile high-level programming language."
+  }
+]

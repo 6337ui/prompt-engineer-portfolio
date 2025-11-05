@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package modelservice;
+
+// Defines a simple service for running prompts against a cloud model.
+service ModelService {
+  rpc RunPrompt (PromptRequest) returns (PromptResponse);
+  rpc RunPromptWithTrace (PromptRequest) returns (TraceResponse);
+}
+
+message PromptRequest {
+  string prompt = 1;
+  map<string, string> meta = 2;
+}
+
+message PromptResponse {
+  string output = 1;
+}
+
+message TraceStep {
+  string name = 1;
+  string detail = 2;
+}
+
+message TraceResponse {
+  repeated TraceStep steps = 1;
+  string final_output = 2;
+}
