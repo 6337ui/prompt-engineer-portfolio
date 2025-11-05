@@ -1,0 +1,8 @@
+# Requirements for LangChain examples
+
+# This file lists additional dependencies needed to run the examples
+# in the `langchain-examples` folder. Keeping a separate
+# requirements file allows optional installation when exploring
+# these examples.
+
+langchain

@@ -1,0 +1,6 @@
+# Requirements for trace-eval harness
+
+# The trace evaluation harness does not currently depend on any
+# external packages beyond the standard library.  This file is left
+# intentionally blank for future expansion (e.g., adding sentence
+# similarity libraries).
