@@ -1,0 +1,63 @@
+{#
+  Универсальный шаблон промпта
+  Сочетает ручную структуру и автоматическую подстановку
+  
+  Переменные:
+    - role_custom: кастомная роль (опционально)
+    - expertise_field: область экспертизы
+    - task_description: описание задачи
+    - context: контекст (опционально)
+    - input_data: входные данные
+    - requirements: список требований
+    - constraints: ограничения
+    - examples: примеры few-shot обучения
+    - output_format: формат вывода
+#}
+
+## Role
+{% if role_custom %}
+{{ role_custom }}
+{% else %}
+Действуй как эксперт в области {{ expertise_field|default("общие знания", true)|title }}
+{% endif %}
+
+## Task Description
+{{ task_description }}
+
+{% if context %}
+## Context
+{{ context }}
+{% endif %}
+
+{% if input_data %}
+## Input Data
+{{ input_data }}
+{% endif %}
+
+## Requirements
+{%- for requirement in requirements|default(["Будь точен", "Дай развёрнутый ответ"], true) %}
+- {{ requirement }}
+{%- endfor %}
+
+{% if constraints %}
+## Constraints
+{%- for constraint in constraints %}
+- {{ constraint }}
+{%- endfor %}
+{% endif %}
+
+{% if examples %}
+## Examples
+{%- for example in examples %}
+### Example {{ loop.index }}
+**Input:** {{ example.input }}
+**Output:** {{ example.output }}
+{% endfor %}
+{% endif %}
+
+## Output Format
+{% if output_format %}
+{{ output_format }}
+{% else %}
+Дай развёрнутый ответ в свободной форме.
+{% endif %}
