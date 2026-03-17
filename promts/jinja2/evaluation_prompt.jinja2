@@ -1,0 +1,52 @@
+{#
+  Шаблон: evaluation_prompt.jinja2
+  Назначение: Оценка качества ответов экспертом
+  Переменные:
+    - field: область экспертизы
+    - user_name: имя пользователя
+    - user_level: уровень (beginner/advanced)
+    - user_question: вопрос пользователя
+    - response_text: текст для оценки
+    - evaluation_date: дата оценки
+    - additional_constraints: список дополнительных ограничений
+#}
+
+## Instruction
+Действуй как эксперт в области {{ field|title }}.
+Оцени предоставленный ответ по критериям точности, полноты и ясности.
+
+## Context
+Пользователь: {{ user_name }}
+Дата: {{ evaluation_date }}
+{% if user_level == 'beginner' %}
+Уровень пользователя: начинающий. Объясняй просто.
+{% elif user_level == 'advanced' %}
+Уровень пользователя: продвинутый. Используй терминологию.
+{% endif %}
+
+## Input Data
+Вопрос: {{ user_question }}
+Ответ для оценки: {{ response_text }}
+
+## Constraints
+- Будь объективен и конкретен
+{%- for constraint in additional_constraints %}
+- {{ constraint }}
+{%- endfor %}
+
+## Output Format
+```json
+{
+  "field": "{{ field }}",
+  "user": "{{ user_name }}",
+  "evaluation": {
+    "accuracy": 0,
+    "completeness": 0,
+    "clarity": 0
+  },
+  "strengths": [],
+  "weaknesses": [],
+  "recommendations": [],
+  "overall_score": 0
+}
+```

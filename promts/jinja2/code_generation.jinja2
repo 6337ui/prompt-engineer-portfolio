@@ -1,0 +1,54 @@
+{#
+  Шаблон: code_generation.jinja2
+  Назначение: Генерация кода с пояснениями
+  Переменные:
+    - language: язык программирования
+    - task_description: описание задачи
+    - requirements: список требований
+    - input_data: входные данные
+#}
+
+## Instruction
+Действуй как senior {{ language }} разработчик.
+
+## Task
+{{ task_description }}
+
+## Requirements
+{%- for requirement in requirements %}
+- {{ requirement }}
+{%- endfor %}
+
+## Constraints
+- Код должен быть production-ready
+- Добавь комментарии для сложной логики
+- Следуй best practices для {{ language }}
+
+## Input
+{{ input_data }}
+
+## Output Format
+Верни ответ в формате JSON:
+```json
+{
+  "code": "",
+  "explanation": "",
+  "complexity": "",
+  "tests": []
+}
+```
+
+## Examples
+**Input:**
+Task: Реализуй функцию для вычисления факториала
+Requirements: ["Итеративный подход", "Обработка ошибок"]
+
+**Output:**
+```json
+{
+  "code": "def factorial(n): ...",
+  "explanation": "Итеративная реализация с проверкой типа",
+  "complexity": "O(n)",
+  "tests": ["factorial(5) == 120", "factorial(0) == 1"]
+}
+```
